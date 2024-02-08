@@ -1,5 +1,6 @@
 import {
   FlatList,
+  Keyboard,
   KeyboardAvoidingView,
   SafeAreaView,
   StyleSheet,
@@ -30,6 +31,8 @@ export default class TodoModal extends Component {
 
     this.props.updateList(list)
     this.setState({ newTodo: '' })
+
+    Keyboard.dismiss()
   }
 
   renderTodo = (todo, index) => {
