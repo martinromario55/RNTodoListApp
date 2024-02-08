@@ -12,6 +12,7 @@ import Colors from './src/utilities/Colors'
 import tempData from './tempData'
 import TodoList from './src/components/TodoList'
 import React from 'react'
+import AddListModal from './src/components/AddListModal'
 
 export default class App extends React.Component {
   state = {
@@ -27,11 +28,13 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Modal animationType="slide">
-          <View>
-            <Text>Modal</Text>
-          </View>
-        </Modal> */}
+        <Modal
+          animationType="slide"
+          visible={this.state.addTodoVisible}
+          onRequestClose={() => this.toggleAddTodoModal()}
+        >
+          <AddListModal closeModal={() => this.toggleAddTodoModal()} />
+        </Modal>
         <View style={styles.rowView}>
           <View style={styles.divider} />
           <Text style={styles.titleText}>
@@ -41,7 +44,10 @@ export default class App extends React.Component {
         </View>
 
         <View style={styles.addBtnView}>
-          <TouchableOpacity style={styles.addList}>
+          <TouchableOpacity
+            style={styles.addList}
+            onPress={() => this.toggleAddTodoModal()}
+          >
             <Feather name="plus" size={16} color={Colors.blue} />
           </TouchableOpacity>
           <Text style={styles.addListText}>Add List</Text>
